@@ -1,9 +1,11 @@
 package com.kgstrivers.kgnews
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
         fetchData()
 
-        mAdapter = NewsListadapter()
+        mAdapter = NewsListadapter(this)
 
         recyclerview.adapter = mAdapter
 
@@ -59,9 +61,10 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
                         newsJsonObject.getString("url"),
                         newsJsonObject.getString("urlToImage")
                     )
-                    Toast.makeText(this,"Entered",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this,newsJsonObject.getString("urlToImage"),Toast.LENGTH_LONG).show()
                     newsArray.add(news)
                 }
+
                 mAdapter.updateAll(newsArray)
 
 
@@ -93,7 +96,10 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
     override fun onItemClicked(item: model)
     {
-        Toast.makeText(this,"Clicked $item",Toast.LENGTH_LONG).show()
+        val builder = CustomTabsIntent.Builder()
+        val  customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(this, Uri.parse(item.url))
+
     }
 
 
