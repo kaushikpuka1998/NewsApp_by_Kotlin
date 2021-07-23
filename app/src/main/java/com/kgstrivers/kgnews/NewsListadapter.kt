@@ -61,6 +61,12 @@ class NewsListadapter(private val listener:NewsItemClicked): RecyclerView.Adapte
         notifyDataSetChanged()
     }
 
+    fun clearone(){
+
+        items.clear()
+        notifyDataSetChanged()
+    }
+
 
 }
 
@@ -79,4 +85,5 @@ class NewsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
 interface NewsItemClicked{
     fun onItemClicked(item: model)
+
 }

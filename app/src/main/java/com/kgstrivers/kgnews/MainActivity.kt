@@ -1,11 +1,19 @@
 package com.kgstrivers.kgnews
 
+import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.Gravity.*
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.view.GravityCompat.apply
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -21,11 +29,14 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
     private lateinit var mAdapter:NewsListadapter
 
 
+    //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.layoutManager = LinearLayoutManager(this)
+
 
 
 
@@ -112,6 +123,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
     private fun refresh()
     {
         swipeContainer.setOnRefreshListener{
+            mAdapter.clearone()
             fetchData()
             Toast.makeText(this, "Page Refreshing...", Toast.LENGTH_SHORT).show()
             swipeContainer.isRefreshing = false
