@@ -9,21 +9,23 @@ import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 
-class NewsListadapter(private val items:ArrayList<String>,private val listener: NewsItemClicked): RecyclerView.Adapter<NewsViewHolder>() {
+class NewsListadapter(): RecyclerView.Adapter<NewsViewHolder>() {
+
+    var  items : ArrayList<model> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.itemcompo,parent,false)
         val viewH = NewsViewHolder(view)
-       view.setOnClickListener{
+       /*view.setOnClickListener{
            listener.onItemClicked(items[viewH.adapterPosition])
-       }
+       }*/
         return viewH
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
 
         val currentItem = items[position]
-        holder.titleview.text = currentItem
+        holder.titleview.text = currentItem.toString()
 
 
     }
@@ -32,6 +34,14 @@ class NewsListadapter(private val items:ArrayList<String>,private val listener: 
         //TODO("Not yet implemented")
 
         return items.size
+    }
+
+    fun updateAll(updatedItems : ArrayList<model>){
+
+        items.clear()
+        items.addAll(updatedItems)
+
+        notifyDataSetChanged()
     }
 
 
@@ -49,5 +59,5 @@ class NewsViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 }
 
 interface NewsItemClicked{
-    fun onItemClicked(item: String)
+    fun onItemClicked(item: model)
 }
