@@ -27,15 +27,19 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
        recyclerview.layoutManager = LinearLayoutManager(this)
 
+
+
         fetchData()
 
         mAdapter = NewsListadapter(this)
 
         recyclerview.adapter = mAdapter
 
+        refresh()
 
 
-        fetchData()
+
+
 
 
 
@@ -92,6 +96,9 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
 
 
+
+
+
     }
 
     override fun onItemClicked(item: model)
@@ -101,6 +108,16 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
         customTabsIntent.launchUrl(this, Uri.parse(item.url))
 
     }
+
+    private fun refresh()
+    {
+        swipeContainer.setOnRefreshListener{
+            fetchData()
+            Toast.makeText(this, "Page Refreshing...", Toast.LENGTH_SHORT).show()
+            swipeContainer.isRefreshing = false
+        }
+    }
+
 
 
 }
