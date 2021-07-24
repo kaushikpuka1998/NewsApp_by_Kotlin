@@ -50,6 +50,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/purple_700"
         android:clickable="true"
+        android:accessibilityPaneTitle="Technology"
         android:tint="@color/white"
         app:layout_constraintBottom_toTopOf="@id/floatingActionButton2"
         app:layout_constraintLeft_toLeftOf="parent"
