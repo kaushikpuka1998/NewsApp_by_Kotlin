@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
     private lateinit var mAdapter:NewsListadapter
 
-
+    lateinit var newsurl:String
     //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,14 +39,44 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
 
 
-
-        fetchData()
+        newsurl = "https://newsapi.org/v2/top-headlines?country=in&apiKey=ca890a69b1c8490484c83c844701261b"
+        CustomfetchData(newsurl)
 
         mAdapter = NewsListadapter(this)
 
         recyclerview.adapter = mAdapter
 
         refresh()
+
+
+        floatingActionButton1.setOnClickListener {
+
+
+            newsurl = "https://newsapi.org/v2/everything?q=bollywood&from=2021-06-24&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
+            CustomfetchData(newsurl)
+
+        }
+        floatingActionButton2.setOnClickListener {
+
+            newsurl = "https://newsapi.org/v2/everything?q=indiasports&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
+            CustomfetchData(newsurl)
+        }
+        floatingActionButton3.setOnClickListener {
+
+            newsurl = "https://newsapi.org/v2/everything?q=technology&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
+            CustomfetchData(newsurl)
+        }
+
+        floatingActionButton3.setOnClickListener {
+
+            newsurl = "https://newsapi.org/v2/everything?q=technology&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
+            CustomfetchData(newsurl)
+        }
+        floatingActionButton4.setOnClickListener {
+
+            newsurl = "https://newsapi.org/v2/everything?q=corona-virus&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
+            CustomfetchData(newsurl)
+        }
 
 
 
@@ -57,10 +87,9 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
     }
 
-
-    private fun fetchData(){
+    private fun CustomfetchData(newsurl:String){
         val queue = Volley.newRequestQueue(this)
-        val url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=ca890a69b1c8490484c83c844701261b"
+        val url = newsurl
 
         val jsonObjectRequest:JsonObjectRequest =object : JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -124,7 +153,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
     {
         swipeContainer.setOnRefreshListener{
             mAdapter.clearone()
-            fetchData()
+            CustomfetchData(newsurl)
             Toast.makeText(this, "Page Refreshing...", Toast.LENGTH_SHORT).show()
             swipeContainer.isRefreshing = false
         }
