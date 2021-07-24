@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.log
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(), NewsItemClicked {
 
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
     lateinit var newsurl:String
     //@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
+    var haspressed:Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,8 +53,17 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
         floatingActionButton1.setOnClickListener {
 
+            if(haspressed)
+            {
+                newsurl = "https://newsapi.org/v2/top-headlines?country=in&apiKey=ca890a69b1c8490484c83c844701261b"
+                haspressed = !haspressed
+            }
+            else
+            {
+                newsurl = "https://newsapi.org/v2/everything?q=bollywood&from=2021-06-24&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
+                haspressed = !haspressed
+            }
 
-            newsurl = "https://newsapi.org/v2/everything?q=bollywood&from=2021-06-24&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
             CustomfetchData(newsurl)
 
         }
@@ -69,7 +80,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
 
         floatingActionButton3.setOnClickListener {
 
-            newsurl = "https://newsapi.org/v2/everything?q=technology&sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b"
+            newsurl = "https://newsapi.org/v2/everything?sortBy=publishedAt&apiKey=ca890a69b1c8490484c83c844701261b&q=android"
             CustomfetchData(newsurl)
         }
         floatingActionButton4.setOnClickListener {
