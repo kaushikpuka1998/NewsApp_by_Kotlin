@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Splashscreentheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Splashscreentheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/teal_200</item>
         <item name="colorPrimaryVariant">#FF5722</item>
